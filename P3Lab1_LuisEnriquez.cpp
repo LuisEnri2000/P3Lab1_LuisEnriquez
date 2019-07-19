@@ -11,6 +11,7 @@ using namespace std;
 
 // Cabezaras
 void printA(string*,int);
+bool tri(int);
 
 
 // Metodo main
@@ -97,23 +98,25 @@ int main() {
 			cin>>n;
 			
 			cout<< n;
-			
-			bool check = false;
-			
-			for (int i = 1; i <= n; i++) {
-				n -=i;
-				m += i;
 				
-				if(n == 0) {
-					check = true;
-					break;
-				}
-			}
 			
-			if (check) {
+			if (tri(n)) {
 				cout << " es triangular!" << endl;
 			}else{
-				cout << " no es triangular! Pero " << m << " es el mas cercano!";
+				cout << " no es triangular! Pero ";
+				for	(int t = 0; t < 100; t++) {
+					if (tri(n+t)) {
+						cout << (n+t);
+						break;
+					}
+					if (tri(n-t)) {
+						cout << (n-t);
+						break;
+					}
+				}
+				
+				
+				cout << " es el mas cercano!";
 			}
 			
 			
@@ -181,3 +184,20 @@ void printA(string* A,int pos) {
 		return printA(A,pos + 1) ;
 	}	
 }
+
+bool tri(int n) {
+	bool p = false;
+	
+	for (int i = 1; i <= n; i++) {
+		n -=i;
+				
+		if(n == 0) {
+			p = true;
+			break;
+		}
+	}
+	
+	return p;
+	
+}
+
